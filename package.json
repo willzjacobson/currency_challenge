@@ -9,7 +9,23 @@
     "start": "npm run build && node --use_strict lib/index.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon --use_strict lib/index.js",
-    "dev": "concurrently 'npm run server' 'npm run client'"
+    "dev": "concurrently 'npm run server' 'npm run client'",
+    "prettier:fix": "prettier --print-width 80 --single-quote --trailing-comma es5 --write index.js **/*.js",
+    "precommit": "lint-staged",
+    "lint": "eslint .",
+    "lint:fix": "eslint lib/ --fix",
+    "format": "npm run lint:fix & npm run prettier:fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "npm run format",
+      "git add"
+    ]
   },
   "dependencies": {
     "@babel/core": "7.1.2",
@@ -23,6 +39,8 @@
     "clean-webpack-plugin": "0.1.19",
     "cors": "2.8.4",
     "ejs": "2.6.1",
+    "eslint": "5.7.0",
+    "eslint-plugin-react": "7.11.1",
     "express": "4.16.4",
     "html-webpack-plugin": "3.2.0",
     "moment": "2.22.2",
@@ -35,7 +53,11 @@
   "devDependencies": {
     "chai": "4.2.0",
     "concurrently": "4.0.1",
+    "eslint-config-prettier": "3.1.0",
+    "husky": "1.1.2",
+    "lint-staged": "7.3.0",
     "mocha": "5.2.0",
+    "prettier": "1.14.3",
     "webpack-cli": "3.1.2",
     "webpack-dev-server": "3.1.9"
   }
