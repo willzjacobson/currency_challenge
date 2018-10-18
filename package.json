@@ -6,15 +6,15 @@
   "scripts": {
     "test": "_mocha --use_strict $(find lib/__tests__ -name \"*.spec.js\")",
     "build": "webpack --mode production",
-    "start": "npm run build && node --use_strict lib/index.js",
+    "start": "NODE_ENV=production npm run build && node --use_strict lib/index.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon --use_strict lib/index.js",
-    "dev": "concurrently 'npm run server' 'npm run client'",
+    "dev": "NODE_ENV=development concurrently 'npm run server' 'npm run client'",
     "prettier:fix": "prettier --print-width 80 --single-quote --trailing-comma es5 --write index.js **/*.js",
     "precommit": "lint-staged",
     "lint": "eslint .",
     "lint:fix": "eslint lib/ --fix",
-    "format": "npm run lint:fix & npm run prettier:fix"
+    "format": "npm run lint:fix && npm run prettier:fix"
   },
   "husky": {
     "hooks": {
@@ -30,7 +30,6 @@
   "dependencies": {
     "@babel/core": "7.1.2",
     "@babel/plugin-proposal-class-properties": "7.1.0",
-    "@babel/preset-env": "7.1.0",
     "@babel/preset-react": "7.0.0",
     "axios": "0.18.0",
     "babel-eslint": "10.0.1",
@@ -38,16 +37,20 @@
     "body-parser": "1.18.3",
     "clean-webpack-plugin": "0.1.19",
     "cors": "2.8.4",
-    "ejs": "2.6.1",
     "eslint": "5.7.0",
+    "eslint-plugin-prettier": "3.0.0",
     "eslint-plugin-react": "7.11.1",
     "express": "4.16.4",
     "html-webpack-plugin": "3.2.0",
     "moment": "2.22.2",
-    "nodemon": "1.18.4",
     "react": "16.5.2",
     "react-bootstrap": "0.32.4",
     "react-dom": "16.5.2",
+    "react-redux": "5.0.7",
+    "redux": "4.0.1",
+    "redux-immutable-state-invariant": "2.1.0",
+    "redux-logger": "3.0.6",
+    "redux-thunk": "2.3.0",
     "webpack": "4.20.2"
   },
   "devDependencies": {
@@ -57,6 +60,7 @@
     "husky": "1.1.2",
     "lint-staged": "7.3.0",
     "mocha": "5.2.0",
+    "nodemon": "1.18.4",
     "prettier": "1.14.3",
     "webpack-cli": "3.1.2",
     "webpack-dev-server": "3.1.9"
