@@ -6,9 +6,9 @@
   "scripts": {
     "test": "_mocha --use_strict $(find lib/__tests__ -name \"*.spec.js\")",
     "build": "webpack --mode production",
-    "start": "NODE_ENV=production npm run build && node --use_strict lib/index.js",
+    "start": "NODE_ENV=production npm run build && node --use_strict lib/index.js --exec babel-node",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
-    "server": "nodemon --use_strict lib/index.js",
+    "server": "nodemon --use_strict lib/index.js --exec babel-node",
     "dev": "NODE_ENV=development concurrently 'npm run server' 'npm run client'",
     "prettier:fix": "prettier --print-width 80 --single-quote --trailing-comma es5 --write index.js **/*.js",
     "precommit": "lint-staged",
@@ -29,7 +29,10 @@
   },
   "dependencies": {
     "@babel/core": "7.1.2",
+    "@babel/node": "7.0.0",
     "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/polyfill": "7.0.0",
+    "@babel/preset-env": "7.1.0",
     "@babel/preset-react": "7.0.0",
     "axios": "0.18.0",
     "babel-eslint": "10.0.1",
